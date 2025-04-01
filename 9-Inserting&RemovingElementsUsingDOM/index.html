@@ -11,7 +11,12 @@
     <div class="container">
         <div class="box">Hey..Hello..</div>
     </div>
-
+    <script>
+        let div = document.createElement("div");
+        div.innerHTML = "I am appended by <b>JS</b> code"
+        div.setAttribute("class", "created");
+        document.querySelector(".container").append(div);
+    </script>
 </body>
 
 </html>
