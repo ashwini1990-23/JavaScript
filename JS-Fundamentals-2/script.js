@@ -32,6 +32,128 @@ const jonas = {
     friends: ['Michael', 'Peter', 'Steven']
 };
 console.log(`${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`);
+
+const jonas1 = {
+    firstName: 'Jonas',
+    lastName: 'Schmedtmann',
+    birthYear: 1991,
+    job: 'teacher',
+    friends: ['Michael', 'Peter', 'Steven'],
+    hasDriversLicense: false,
+
+    calcAge: function () {
+        this.age = 2037 - this.birthYear;
+        return this.age;
+    },
+
+    calcSummary: function () {
+        return `${this.firstName} is ${this.calcAge()}-years old ${this.job}, and he has ${this.hasDriversLicense ? 'a' : 'no'} driver's licence`;
+    }
+};
+console.log(jonas1.calcAge());
+//console.log(jonas1['calcAge'](1991)); // Calling method in bracket notation
+
+console.log(jonas1.calcSummary());
+
+
+// Challenge #3
+// 1 
+const mark = {
+    fullName: 'Mark Miller',
+    mass: 78,
+    height: 1.69,
+
+    calcBMI: function () {
+        this.bmi = this.mass / (this.height * this.height);
+        return this.bmi;
+    }
+}
+
+const john = {
+    fullName: 'John Smith',
+    mass: 92,
+    height: 1.95,
+
+    calcBMI: function () {
+        this.bmi = this.mass / (this.height * this.height);
+        return this.bmi;
+    }
+}
+
+console.log(mark.calcBMI());
+console.log(john.calcBMI());
+
+if (mark.bmi > john.bmi) {
+    console.log(`${mark.fullName}'s BMI (${mark.calcBMI()}) is higher than ${john.fullName} (${john.bmi})`)
+}
+else if (john.bmi > mark.bmi) {
+    console.log(`${john.fullName}'s BMI (${john.calcBMI()}) is higher than ${mark.fullName} (${mark.bmi})`)
+}
+
+// Looping Arrays, Breaking and Continuing
+const jonas3 = [
+    'Jonas',
+    'Schmedtmann',
+    2037 - 1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven'],
+    true
+];
+const types = [];
+
+// console.log(jonas[0])
+// console.log(jonas[1])
+// ...
+// console.log(jonas[4])
+// jonas[5] does NOT exist
+
+for (let i = 0; i < jonas3.length; i++) {
+    // Reading from jonas array
+    console.log(jonas3[i], typeof jonas3[i]);
+
+    // Filling types array
+    // types[i] = typeof jonas[i];
+    types.push(typeof jonas3[i]);
+}
+console.log(types)
+
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+for (let i = 0; i < years.length; i++) {
+    ages[i] = 2037 - years[i];
+    //  ages.push(2037-years[i]);
+}
+console.log(ages)
+
+// WHILE
+let dice = Math.trunc(Math.random() * 6) + 1;
+while (dice !== 6) {
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+}
+
+// Challenge: 4
+const calcTip = function (bill) {
+    return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+}
+
+/* Write your code below. Good luck! 🙂 */
+// 1
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+
+// 2
+const totals = [];
+const tips = [];
+
+// 3 
+for (let i = 0; i <= bills.length - 1; i++) {
+    // tips[i] = calcTip(bills[i]);
+    // totals[i] = bills[i] + tips[i];
+    tips.push(calcTip(bills[i]));
+    totals.push(bills[i] + tips[i]);
+}
+console.log(tips);
+console.log(totals);
 // function logger(name) {
 //   console.log(`Hello ${name}`);
 // }
