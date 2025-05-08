@@ -68,6 +68,62 @@ console.log(guests);
 // Logical Assignment Operators: 1) Logical OR assignment operator( ||= )  2) Logical nullish assignment opearator( ??= )
 // 3) Logical AND assignment operator ( &&= )
 
+// for-of-loop
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+for (const item of menu) console.log(item);
+
+for (const item of menu.entries()) {
+  console.log(item);
+}
+console.log([...menu.entries()]);
+console.log(...menu.entries());
+
+// Looping over Objects
+// 1: property names(keys)
+//2: values
+const values1 = Object.values(openingHours);
+console.log(values1);
+for (const value of values1)
+  console.log(value);
+// 3: whole object=entries(name+value)
+const entries = Object.entries(openingHours);
+console.log(entries);
+for (const [day, { open, close }] of entries) {
+  console.log(day, open, close);
+}
+
+
+//  ************ Sets ***********
+// Conversion of Array to Set
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+console.log(ordersSet);
+
+console.log(new Set('Jonas'));
+
+console.log(ordersSet.size);
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+ordersSet.delete('Risotto');
+// ordersSet.clear();
+console.log(ordersSet);
+
+for (const order of ordersSet) console.log(order);
+
+// Example use case
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+// Conversion of set to an array : [...new Set(staff)]
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+
 // ************ Assignments: Data Structures, Opertators and Strings *****************
 // 1
 // Data
@@ -275,7 +331,7 @@ console.log(fiveStarRatings, oneStarRatings, threeStarRatings);
 
 // Coding Challenge #1
 
-/* 
+/*
 We're building a football betting app (soccer for my American friends 😅)!
 
 Suppose we get data from a web service about a certain game (below). In this challenge we're gonna work with the data. So here are your tasks:
@@ -290,7 +346,7 @@ Suppose we get data from a web service about a certain game (below). In this cha
 
 TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
 */
-const game = {
+/* const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
   players: [
@@ -373,4 +429,90 @@ printGoals(...game.scored);
 // 7: The team with the lower odd is more likely to win. Print to the console which team is more likely to win, WITHOUT using an if/else statement or the ternary operator.
 team1 < team2 && console.log('Team 1 is more likely to win');
 team1 > team2 && console.log('Team 2 is more likely to win');
+*/
 
+// Challenge 2
+/* 1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+  3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+        Odd of victory Bayern Munich: 1.33
+        Odd of draw: 3.25
+        Odd of victory Borrussia Dortmund: 6.5
+  Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+  
+  BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
+        {
+          Gnarby: 1,
+          Hummels: 1,
+          Lewandowski: 2
+        }
+  */
+/*const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+
+};
+
+//1 : Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+console.log([...game.scored.entries()]);
+for (const [goal, player] of game.scored.entries()) {
+  console.log(`Goal ${goal + 1}: ${player}`);
+}
+
+// 2:Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+console.log(Object.values(game.odds));
+let odd = 0;
+for (const x of Object.values(game.odds)) {
+  odd = odd + x;
+}
+const average = odd / 3;
+console.log(average);
+
+/* 3: Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+Odd of victory Bayern Munich: 1.33
+Odd of draw: 3.25
+Odd of victory Borrussia Dortmund: 6.5
+Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names
+
+console.log(Object.entries(game.odds));
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+  console.log(`Odd of ${teamStr} ${odd}`);
+}
+*/
