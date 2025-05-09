@@ -80,14 +80,15 @@ console.log(...menu.entries());
 
 // Looping over Objects
 // 1: property names(keys)
+console.log('Object.keys', Object.keys(openingHours))
 //2: values
 const values1 = Object.values(openingHours);
 console.log(values1);
 for (const value of values1)
   console.log(value);
-// 3: whole object=entries(name+value)
+// 3: whole object=entries(name+value) // Convert Object to Array
 const entries = Object.entries(openingHours);
-console.log(entries);
+console.log('Object entries', entries);
 for (const [day, { open, close }] of entries) {
   console.log(day, open, close);
 }
@@ -123,6 +124,48 @@ const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
 // Conversion of set to an array : [...new Set(staff)]
 const staffUnique = [...new Set(staff)];
 console.log(staffUnique);
+
+// MAPS
+const rest = new Map();
+// Add elements to map
+rest.set('name', 'Italiano'); // set() method: updates the map it is called on and returns the map
+rest.set(1, 'Florence, Italy');
+rest.set(2, 'Lisbon, Portugal');
+console.log(rest);
+// Read data from map
+console.log(rest.get('name'));
+
+// Arrays or Objects as Map keys
+const arrMap = [1, 2];
+rest.set(arrMap, 'Test');
+console.log(rest);
+console.log(rest.get(arrMap));
+// Object
+console.log(rest.set(document.querySelector('h1'), 'Heading'));
+
+// Convert Object to a Map
+console.log(Object.entries(openingHours));
+const openingHoursMap = new Map(Object.entries(openingHours));
+console.log(openingHoursMap);
+
+// Map: Iteration
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct 🎉'],
+  [false, 'Try again!'],
+]);
+console.log(question);
+for (const [key, value] of question) {
+  console.log(key, value);
+}
+//console.log(question.get(question.get('correct') === answer));
+
+// Convert Map to an Array
+console.log([...question]);
 
 // ************ Assignments: Data Structures, Opertators and Strings *****************
 // 1
@@ -431,7 +474,7 @@ team1 < team2 && console.log('Team 1 is more likely to win');
 team1 > team2 && console.log('Team 2 is more likely to win');
 */
 
-// Challenge 2
+// Coding Challenge #2
 /* 1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
 2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
   3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
@@ -439,7 +482,7 @@ team1 > team2 && console.log('Team 2 is more likely to win');
         Odd of draw: 3.25
         Odd of victory Borrussia Dortmund: 6.5
   Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
-  
+
   BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
         {
           Gnarby: 1,
@@ -516,3 +559,64 @@ for (const [team, odd] of Object.entries(game.odds)) {
   console.log(`Odd of ${teamStr} ${odd}`);
 }
 */
+
+// Coding Challenge #3
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+
+GOOD LUCK 😀
+*/
+
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+// 1: Create an array 'events' of the different game events that happened (no duplicates)
+// let events = [];
+// for (const [key, value] of gameEvents) {
+//   events.push(value);
+// }
+// const eventsSet = new Set(events)
+// console.log([...eventsSet]);
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+// 2: After the game has finished,it is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+gameEvents.delete(64);
+console.log(gameEvents);
+
+// 3: Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+console.log(`An event happened, on average, every ${90 / gameEvents.size} minutes`)
+const time = [...gameEvents.keys()].pop();
+console.log(time);
+console.log(
+  `An event happened, on average, every ${time / gameEvents.size} minutes`
+);
+
+// 4: Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+// [FIRST HALF] 17: ⚽️ GOAL
+for (const [key, value] of gameEvents) {
+  //console.log(key, value);
+  // if (key <= 45) console.log(`[FIRST HALF] ${key}: ${value}`);
+  // else console.log(`[SECOND HALF] ${key}: ${value}`)
+  key <= 45 ? console.log(`[FIRST HALF] ${key}: ${value}`) : console.log(`[SECOND HALF] ${key}: ${value}`);
+}
+// for (const [min, event] of gameEvents) {
+//   const half = min <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`[${half} HALF] ${min}: ${event}`);
+// }
