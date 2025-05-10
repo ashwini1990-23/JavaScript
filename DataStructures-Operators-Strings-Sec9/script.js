@@ -167,6 +167,26 @@ for (const [key, value] of question) {
 // Convert Map to an Array
 console.log([...question]);
 
+// *********** STRINGS **************
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(Number(plane[1]));
+console.log(plane[2]);
+console.log(plane[3]);
+console.log('B323'[0]);
+
+console.log(airline.length);
+console.log(plane.length);
+console.log('B323'.length);
+
+// String Methods
+console.log(airline.indexOf('r')); // index of first occurance of character
+console.log(airline.lastIndexOf('r')) // index of last occurance of character
+console.log(airline.indexOf('Portugal'));
+
+
 // ************ Assignments: Data Structures, Opertators and Strings *****************
 // 1
 // Data
@@ -571,7 +591,7 @@ Let's continue with our football betting app! This time, we have a map with a lo
       [FIRST HALF] 17: ⚽️ GOAL
 
 GOOD LUCK 😀
-*/
+
 
 const gameEvents = new Map([
   [17, '⚽️ GOAL'],
@@ -620,3 +640,4 @@ for (const [key, value] of gameEvents) {
 //   const half = min <= 45 ? 'FIRST' : 'SECOND';
 //   console.log(`[${half} HALF] ${min}: ${event}`);
 // }
+*/
