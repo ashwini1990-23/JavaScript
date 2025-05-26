@@ -38,3 +38,37 @@ console.log(john.species, mary.species);
 
 console.log(john.hasOwnProperty('firstName'));
 console.log(john.hasOwnProperty('species'));
+
+
+console.log(john.__proto__);
+console.log(john.__proto__.__proto__);
+console.log(Person.prototype.constructor);
+
+// ES6 Classes
+//Class Expression
+// const PersonCl = class {
+
+// }
+// Class Declaration
+class PersonCl {
+    constructor(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+    // Method will be added to the .prototype property of the class
+    clacAge() {
+        console.log(2037 - this.birthYear);
+    }
+}
+
+const jessica = new PersonCl('Jessica', 1990);
+console.log(jessica);
+jessica.clacAge();
+
+console.log(jessica.__proto__ === PersonCl.prototype);
+
+// Can create methods on prototype
+PersonCl.prototype.greet = function () {
+    console.log(`hello ${this.firstName}`);
+}
+jessica.greet();
