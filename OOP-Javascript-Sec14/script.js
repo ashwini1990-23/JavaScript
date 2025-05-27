@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 // 1: Contsuctor Functions
 const Person = function (firstName, birthYear) {
     // Instance Properties
@@ -43,6 +43,7 @@ console.log(john.hasOwnProperty('species'));
 console.log(john.__proto__);
 console.log(john.__proto__.__proto__);
 console.log(Person.prototype.constructor);
+*/
 
 // ES6 Classes
 //Class Expression
@@ -102,7 +103,7 @@ account.latest = 500;
 console.log(account.movements);
 
 
-
+/*
 // Getters and Setters for class : Data validation
 class PersonCl {
     constructor(fullName, birthYear) {
@@ -132,3 +133,69 @@ class PersonCl {
 const jessica = new PersonCl('Jessica Davis', 1990);
 
 console.log(jessica.age);
+*/
+
+// Inheritance Between "Classes": Constructor Functions
+const Person = function (firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+};
+
+Person.prototype.clacAge = function () {
+    console.log(2037 - this.birthYear);
+}
+
+const Student = function (firstName, birthYear, course) {
+    Person.call(this, firstName, birthYear);
+    this.course = course;
+}
+
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+}
+const mike = new Student('Mike', 2020, 'Computer Science');
+console.log(mike);
+mike.introduce();
+mike.clacAge();
+
+// Inheritance Between "Classes": ES6 Classes
+class PersonCl {
+    constructor(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+    clacAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+}
+
+class StudentCl extends PersonCl {
+    constructor(firstName, birthYear, course) {
+        // Need to happen first
+        super(firstName, birthYear);
+        this.course = course;
+    }
+    introduce() {
+        console.log(`My name is ${this.firstName} and I study ${this.course}`);
+    }
+}
+
+const martha = new StudentCl('Martha Jonas', 2012, 'Computer Science');
+martha.introduce();
+martha.clacAge();
+
+// Inheritance between classes: Object.create()
+const PersonProto = {
+    clacAge() {
+        console.log(2037 - this.birthYear);
+    },
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
+
+const steven = Object.create(PersonProto);
