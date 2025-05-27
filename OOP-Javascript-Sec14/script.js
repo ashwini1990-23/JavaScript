@@ -50,7 +50,7 @@ console.log(Person.prototype.constructor);
 
 // }
 // Class Declaration
-class PersonCl {
+/*class PersonCl {
     constructor(firstName, birthYear) {
         this.firstName = firstName;
         this.birthYear = birthYear;
@@ -59,7 +59,15 @@ class PersonCl {
     clacAge() {
         console.log(2037 - this.birthYear);
     }
-}
+
+    get age() {
+        return 2037 - this.birthYear;
+    }
+
+    set age(age) {
+        this.age;
+    }
+};
 
 const jessica = new PersonCl('Jessica', 1990);
 console.log(jessica);
@@ -72,3 +80,55 @@ PersonCl.prototype.greet = function () {
     console.log(`hello ${this.firstName}`);
 }
 jessica.greet();
+*/
+
+// Getters and Setters
+const account = {
+    owner: 'John',
+    movements: [100, 200, 34, 450],
+
+    get latest() {
+        return this.movements.slice(-1).pop();
+    },
+
+    set latest(mov) {
+        this.movements.push(mov);
+    }
+};
+
+console.log('getters and setters:', account.latest);
+
+account.latest = 500;
+console.log(account.movements);
+
+
+
+// Getters and Setters for class : Data validation
+class PersonCl {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+    // Method will be added to the .prototype property of the class
+    clacAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+    get age() {
+        return 2037 - this.birthYear;
+    }
+
+    // This pattern we use whenever we are trying to set a property that already exists
+    set fullName(name) {
+        if (name.includes(' ')) this._fullName = name;
+        else alert(`${name} is not a full name!`);
+    }
+
+    get fullName() {
+        return this._fullName;
+    }
+};
+
+const jessica = new PersonCl('Jessica Davis', 1990);
+
+console.log(jessica.age);
