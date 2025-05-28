@@ -199,3 +199,96 @@ const PersonProto = {
 };
 
 const steven = Object.create(PersonProto);
+
+// Another class Example
+class Account {
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.pin = pin;
+        this.movements = [];
+        this.locale = navigator.language;
+
+        console.log(`Thanks for opening an account, ${owner}`);
+    }
+    // Public Interface(API's) of object acc1
+    deposit(val) {
+        this.movements.push(val);
+    }
+    // Public Interface(API's) of object acc1
+    withdrawl(val) {
+        // this.movements.push(val);
+        this.deposit(-val);
+    }
+}
+
+const acc1 = new Account('John', 'EUR', 1111);
+
+// acc1.movements.push(100);
+// acc1.movements.push(-200);
+acc1.deposit(250);
+acc1.withdrawl(140);
+console.log(acc1);
+
+
+// Encapsulation: Private Class Feilds and Methods
+
+class AccountCl {
+    // Public fields
+    locale = navigator.language;
+    bank = 'Bankist';
+    //Private fields
+    #movements = [];
+    #pin;
+
+
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.#pin = pin;
+        // this.movements = [];
+        // this.locale = navigator.language;
+
+        console.log(`Thanks for opening an account, ${owner}`);
+    }
+    // Public Interface(API's) of object acc1 / Public methods
+    getMovements() {
+        return this.#movements;
+    }
+
+    deposit(val) {
+        this.#movements.push(val);
+        return this;
+    }
+    // Public Interface(API's) of object acc1
+    withdrawl(val) {
+        // this.movements.push(val);
+        this.deposit(-val);
+        return this;
+    }
+    // Private Method
+    #approveLoan(val) {
+        return true;
+    }
+    requestLoan(val) {
+        if (this.#approveLoan(val)) {
+            this.deposit(val);
+            console.log(`Loan approved`);
+        }
+        return this;
+    }
+
+}
+
+const accCl1 = new AccountCl('John', 'EUR', 1111);
+
+// Chaining methods
+const movs = accCl1.deposit(10)
+    .withdrawl(20)
+    .withdrawl(30)
+    .requestLoan(40)
+    .withdrawl(50)
+    .getMovements();
+
+console.log(accCl1);
+console.log(movs);
