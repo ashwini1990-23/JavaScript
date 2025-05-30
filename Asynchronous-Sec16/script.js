@@ -186,7 +186,7 @@ const renderError = function (msg) {
     // countriesContainer.style.opacity = 1;
 }
 
-const getCountryData = function (country) {
+/*const getCountryData = function (country) {
     // Country 1
     fetch(`https://restcountries.com/v2/name/${country}`)
         .then((response) => response.json())
@@ -227,5 +227,131 @@ const getCountryData = function (country) {
 
 btn.addEventListener('click', function () {
     getCountryData('portugal');
-})
+});
+
+getCountryData('sdghjg'); */
 ///////////////////
+
+///////////////
+// Throwing errors manually
+
+const getJSON = function (url, errMsg = 'Something went wrong') {
+    return fetch(url).then(response => {
+        console.log(response);
+        if (!response.ok)
+            throw new Error(`${errMsg} (${response.status})`);
+
+        return response.json();
+    })
+};
+/*
+const getCountryData = function (country) {
+    // Country 1
+    fetch(`https://restcountries.com/v2/name/${country}`)
+        .then((response) => {
+            console.log(response);
+            if (!response.ok)
+                throw new Error(`Country not found (${response.status})`);
+
+            return response.json();
+        })
+        .then((data) => {
+            renderCountry(data[0]);
+
+            // const neighbour = data[0].borders[0];
+            const neighbour = 'sjhjs';
+            console.log(neighbour);
+            if (!neighbour) return;
+
+            // Country 2
+            return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
+
+        })
+        // Chaining Promises
+        .then(response => {
+            if (!response.ok)
+                throw new Error(`Country not found (${response.status})`);
+            return response.json()
+        })
+        .then(data => {
+            console.log(data);
+            renderCountry(data, 'neighbour');
+        })
+        .catch(err => {
+            console.error(`${err} `);
+            renderError(`Something went wrong : ${err.message}. Try again!`);
+        })
+        .finally(() => {
+            countriesContainer.style.opacity = 1;
+        })
+
+    //     const neighbour1 = data.borders[1];
+    //     if (!neighbour1) return;
+
+    //     // Country 3
+    //     return fetch(`https://restcountries.com/v2/alpha/${neighbour1}`);
+    // })
+    // .then(response => response.json())
+    // .then(data => renderCountry(data, 'neighbour'));
+};*/
+
+const getCountryData = function (country) {
+    // Country 1
+    getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
+        .then((data) => {
+            renderCountry(data[0]);
+            console.log(data);
+            const neighbour = data[0].borders[0];
+            // const neighbour=undefined;
+            console.log(neighbour);
+            if (!neighbour)
+                throw new Error('No neighbour country found!');
+
+            // Country 2
+            return getJSON(`https://restcountries.com/v2/alpha/${neighbour}`, 'Country not found');
+
+        })
+        // Chaining Promises
+        .then(data => {
+            console.log(data);
+            renderCountry(data, 'neighbour');
+        })
+        .catch(err => {
+            console.error(`${err} `);
+            renderError(`Something went wrong : ${err.message}. Try again!`);
+        })
+        .finally(() => {
+            countriesContainer.style.opacity = 1;
+        })
+
+    //     const neighbour1 = data.borders[1];
+    //     if (!neighbour1) return;
+
+    //     // Country 3
+    //     return fetch(`https://restcountries.com/v2/alpha/${neighbour1}`);
+    // })
+    // .then(response => response.json())
+    // .then(data => renderCountry(data, 'neighbour'));
+};
+
+btn.addEventListener('click', function () {
+    getCountryData('australia');
+});
+
+// getCountryData('sdghjg');
+////////////////////////////
+
+////////////////////////
+// Event Loop in practice
+console.log('Test start');
+setTimeout(() => console.log('0 Sec timer'), 0);
+Promise.resolve('Resolved promise 1').then(res => console.log(res));
+Promise.resolve('Resolved promise 2').then(res => {
+    for (let i = 0; i < 1000; i++) { }
+    console.log(res)
+});
+console.log('Test end');
+/////////////////
+
+//////////////////////
+// Building a Simple Promise
