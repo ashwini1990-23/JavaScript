@@ -164,22 +164,22 @@ const getCountryData = function (country) {
 
 /////////////////////////
 // Handling Rejected Promises
-const renderCountry = function (data, className = '') {
-    const html = `
-    <article class="country ${className}">
-          <img class="country__img" src="${data.flag}" />
-          <div class="country__data">
-            <h3 class="country__name">${data.name}</h3>
-            <h4 class="country__region">${data.region}</h4>
-            <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)}M people</p>
-            <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
-            <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
-          </div>
-        </article>
-    `;
-    countriesContainer.insertAdjacentHTML('beforeend', html);
-    // countriesContainer.style.opacity = 1;
-}
+// const renderCountry = function (data, className = '') {
+//     const html = `
+//     <article class="country ${className}">
+//           <img class="country__img" src="${data.flag}" />
+//           <div class="country__data">
+//             <h3 class="country__name">${data.name}</h3>
+//             <h4 class="country__region">${data.region}</h4>
+//             <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)}M people</p>
+//             <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+//             <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+//           </div>
+//         </article>
+//     `;
+//     countriesContainer.insertAdjacentHTML('beforeend', html);
+//     // countriesContainer.style.opacity = 1;
+// }
 
 const renderError = function (msg) {
     countriesContainer.insertAdjacentText('beforeend', msg);
@@ -355,6 +355,7 @@ console.log('Test end');
 /////////////////
 */
 
+/*
 //////////////////////
 // Building a Simple Promise
 const lotteryPromise = new Promise(function (resolve, reject) {
@@ -385,3 +386,110 @@ wait(2).then(() => {
 
 Promise.resolve('abc').then(x => console.log(x));
 Promise.reject(new Error('error')).catch(x => console.error(x));
+*/
+//////////////////
+
+///////////////
+// Consuming promises using async and await
+
+const renderCountry = function (data, className = '') {
+    const html = `
+    <article class="country ${className}">
+          <img class="country__img" src="${data.flag}" />
+          <div class="country__data">
+            <h3 class="country__name">${data.name}</h3>
+            <h4 class="country__region">${data.region}</h4>
+            <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)}M people</p>
+            <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+          </div>
+        </article>
+    `;
+    countriesContainer.insertAdjacentHTML('beforeend', html);
+    countriesContainer.style.opacity = 1;
+}
+
+// Promisifying the Geolocation
+const getPosition = function () {
+    return new Promise(function (resolve, reject) {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+};
+
+const whereAmI = async function () {
+    try {// Geolocation
+        const pos = await getPosition();
+        const { latitude: lat, longitude: lng } = pos.coords;
+
+        // Reverse geocoding
+        const resGeo = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`);
+        //if response object doesnot have ok property set tot rue then throw new error :Error handling
+        if (!resGeo.ok) throw new Error(`Problem getting location data`);
+
+        const dataGeo = await resGeo.json();
+        //  console.log('Geo Data', dataGeo);
+
+        // Country data
+        const res = await fetch(`https://restcountries.com/v2/name/${dataGeo.countryCode}`);
+        //  console.log(res);
+        if (!res.ok) throw new Error(`Problem getting country`)
+        const data = await res.json();
+        //  console.log(data);
+        renderCountry(data[44]);
+
+        return `You are in ${dataGeo.city}, ${dataGeo.countryName}`;
+    } catch (err) {
+        // console.error(err);
+        renderError(`Something went wrong..${err.message}`);
+        // Reject promise (manually) retruned from async function
+        throw err;
+    }
+}
+
+console.log('1: Will get location');
+// const city = whereAmI();
+// console.log('2: ',city);
+// whereAmI()
+//     .then(city => console.log(`2: ${city}`))
+//     .catch(err => console.error(`2: ${err.message} `))
+//     .finally(() => console.log('3: Finished getting location'));
+
+// Calling async function from another async function
+(async function () {
+    try {
+        const res = await whereAmI();
+        console.log(`2: ${res}`);
+    } catch (err) {
+        console.error(`2: ${err.message}`);
+    }
+
+    console.log('3: Finished getting location');
+})();
+
+
+////////////
+// Running Promises in Parallel
+// 1. Promise.all() 
+const get3Countries = async function (c1, c2, c3) {
+    try {
+        // const [data1] = await getJSON(`https://restcountries.com/v2/name/${c1}`);
+        // const [data2] = await getJSON(`https://restcountries.com/v2/name/${c2}`);
+        // const [data3] = await getJSON(`https://restcountries.com/v2/name/${c3}`);
+        // console.log([data1.capital, data2.capital, data3.capital]);
+
+        const data = await Promise.all([
+            getJSON(`https://restcountries.com/v2/name/${c1}`),
+            getJSON(`https://restcountries.com/v2/name/${c2}`),
+            getJSON(`https://restcountries.com/v2/name/${c3}`),
+        ]);
+        console.log(data);
+        console.log(data[0]);
+        console.log(data.map(d => d[0].capital));
+
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+get3Countries('portugal', 'canada', 'tanzania');
+
+// 2: Promise.race()
