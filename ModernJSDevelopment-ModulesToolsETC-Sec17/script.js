@@ -3,7 +3,7 @@
 addToCart('bread', 5);
 console.log(price, tq);
 */
-console.log('Importing module');
+// console.log('Importing module');
 
 // import * as ShoppingCart from './shoppingCart.js';
 // ShoppingCart.addToCart('bread', 5);
@@ -13,12 +13,12 @@ console.log('Importing module');
 // import add, { addToCart, totalPrice as price, tq } from './shoppingCart.js';
 // console.log(price);
 
-import add, { cart } from './shoppingCart.js';
-add('pizza', 2);
-add('bread', 5);
-add('apples', 4);
+// import add, { cart, totalPrice } from './shoppingCart.js';
+// add('pizza', 2);
+// add('bread', 5);
+// add('apples', 4);
 
-console.log(cart);
+// console.log(cart);
 
 ////////////////
 // Top-level await
@@ -28,7 +28,7 @@ const res = await fetch('https://jsonplaceholder.typicode.com/posts');
 const data = await res.json();
 console.log(data);
 console.log('End of fetching....');
-*/
+
 const getLastPost = async function () {
     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
     const data = await res.json();
@@ -45,11 +45,56 @@ console.log('Last post 1: ', lastPOst);
 
 const lastPOst2 = await getLastPost();
 console.log('Last post 2:', lastPOst2);
+*/
 
+/*
 //////////////////
 // Module Pattern
-(function () {
+const ShoppingCart2 = (function () {
     const cart = [];
     const shippingCost = 10;
+    const totalPrice = 237;
+    const totalQuantity = 23;
 
+    const addToCart = function (product, quantity) {
+        cart.push({ product, quantity });
+        console.log(`${quantity} ${product} added to cart`);
+    };
+
+    const orderStock = function (product, quantity) {
+        console.log(`${quantity} ${product} orderd from supplier`);
+    };
+
+    return {
+        addToCart,
+        cart,
+        totalPrice,
+        totalQuantity,
+    };
 })();
+
+ShoppingCart2.addToCart('apple', 2);
+ShoppingCart2.addToCart('pizza', 2);
+console.log(ShoppingCart2);
+console.log(ShoppingCart2.shippingCost);
+*/
+
+///////////////////////////
+// NPM
+// import { cloneDeep } from "./node_modules/lodash-es/cloneDeep.js";
+const state = {
+    basket: [
+        { item: 'banana', quantity: 3 },
+        { item: 'mangoes', quantity: 5 },
+        { item: 'oranges', quantity: 10 },
+    ],
+    user: { loggedIn: true },
+}
+
+const stateClone = Object.assign({}, state);
+const stateDeepClone = structuredClone(state);
+
+state.user.loggedIn = false;
+console.log(stateClone);
+
+console.log('Structured Clone: ', stateDeepClone);
