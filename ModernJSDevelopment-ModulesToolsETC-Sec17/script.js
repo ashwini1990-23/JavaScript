@@ -98,3 +98,33 @@ state.user.loggedIn = false;
 console.log(stateClone);
 
 console.log('Structured Clone: ', stateDeepClone);
+
+// Hot Module Replacement
+if (module.hot) {
+    module.hot.accept();
+}
+
+// Babel Configuration
+class Person {
+    #greeting = 'Hey';
+    constructor(name) {
+        this.name = name;
+        console.log(`${this.#greeting}, ${this.name}`);
+    }
+}
+
+const jonas = new Person('Jonas');
+
+console.log('Jonas' ?? null); // nullish coalacing operator
+
+console.log(cart.find(el => el.quantity >= 2));
+Promise.resolve('TEST').then(x => console.log(x));
+
+// Polyfilling
+// Importing Polyfilling library  or do it manually in terminal using cmd: npm i core-js
+import 'core-js/stable'; // Instead of using whole library to polyfill we can cherrypick particular feature like array.find () method like below
+// import 'core-js/stable/array/find';
+// import 'core-js/stable/promise';
+
+// Polyfilling async functions
+import 'regenerator-runtime/runtime'; // npm i regenerator-runtime
