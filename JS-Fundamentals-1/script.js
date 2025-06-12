@@ -134,7 +134,7 @@ else {
 console.log(century);
 */
 
-
+/*
 // Type Conversion and Type Coercion
 //type conversion
 const inputYear = '1991';
@@ -195,3 +195,67 @@ if (favourite === 23) {
 } else {
     console.log('Number is not 23 or 7');
 }
+*/
+
+// Logical Operators
+const hasDriversLicense = true;
+const hasGoodVision = true;
+
+console.log(hasDriversLicense && hasGoodVision);
+console.log(hasDriversLicense || hasGoodVision);
+console.log(!hasDriversLicense);
+
+
+if (hasDriversLicense && hasGoodVision) {
+    console.log("Sarah can drive!");
+} else {
+    console.log("Someone else should drive..");
+}
+
+const isTired = false;
+console.log(hasDriversLicense && hasGoodVision && isTired);
+
+if (hasDriversLicense && hasGoodVision && !isTired) {
+    console.log("Sarah can drive!");
+} else {
+    console.log("Someone else should drive..");
+}
+
+
+// Switch Statement
+const day = 'wednesday';
+switch (day) {
+    case 'monday':  // day === 'monday'
+        console.log('Plan course structure');
+        console.log('Go to coding meet up');
+        break;
+    case 'tuesday':
+        console.log('Prepare theory videos');
+        break;
+    case 'wednesday':
+    case 'thursday':
+        console.log('Write code examples');
+        break;
+    case 'friday':
+        console.log('Record videos');
+        break;
+    case 'saturday':
+    case 'sunday':
+        console.log('Enjoy the weekend');
+        break;
+    default:
+        console.log('Not a valid day');
+}
+
+
+// Statements and Expressions
+
+// Conditional(Ternary) Operator
+const age = 23;
+age >= 18 ? console.log('You can drink wine') : console.log('You can drink water');
+
+const drink = age >= 18 ? 'Wine' : 'Water';
+console.log(drink);
+
+console.log(`I like to drink ${age >= 18 ? 'Wine :)' : 'Water :('} `);
+
