@@ -356,7 +356,7 @@ console.log(totals);
 // }
 
 
-
+/*
 // Functions
 function logger() {
     console.log('My name is Jonas');
@@ -419,3 +419,48 @@ function fruitProcessor1(apples, oranges) {
 }
 
 console.log(fruitProcessor1(2, 3));
+*/
+
+// Arrays
+const friend1 = 'Michael';
+const friend2 = 'Steven';
+const friend3 = 'Peter';
+
+// 1: way of creating an array
+const friends = ['Michael', 'Steven', 'Peter'];
+console.log(friends); // (3) ['Michael', 'Steven', 'Peter'] : in console
+// 2: another way of creating an array
+const years = new Array(1991, 1984, 2008, 2009);
+console.log(years);
+
+console.log(friends[0], friends[2], years[0]);
+
+console.log(friends.length);
+console.log(friends[friends.length - 1]);
+
+friends[2] = 'Jay';
+console.log(friends);
+
+const firstName = 'Jonas';
+const jonas = [firstName, 'Schmedtmann', 2037 - 1991, 'teacher', friends];
+console.log(jonas);
+console.log(jonas.length);
+
+// Basic Array Operations(methods)
+const friendsNew = ['Michael', 'Steven', 'Peter'];
+// Add elements
+const newLength = friendsNew.push('Jay');
+console.log(friendsNew);
+console.log('Push value :', newLength);
+
+friendsNew.unshift('John');
+console.log(friendsNew);
+
+// Remove  elements
+friendsNew.pop();
+const popped = friendsNew.pop();
+console.log(friendsNew);
+console.log(popped);
+
+friendsNew.shift();
+console.log(friendsNew);
