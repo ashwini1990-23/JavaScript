@@ -421,6 +421,7 @@ function fruitProcessor1(apples, oranges) {
 console.log(fruitProcessor1(2, 3));
 */
 
+/*
 // Arrays
 const friend1 = 'Michael';
 const friend2 = 'Steven';
@@ -464,3 +465,79 @@ console.log(popped);
 
 friendsNew.shift();
 console.log(friendsNew);
+*/
+const friendsNew = ['Michael', 'Steven', 'Peter'];
+console.log(friendsNew.indexOf('Steven'));
+console.log(friendsNew.indexOf('Bob'));
+console.log(friendsNew.indexOf('Henry'));
+
+friendsNew.push(23);
+console.log(friendsNew.includes('Steven'));
+console.log(friendsNew.includes('Bob'));
+console.log(friendsNew.includes(23));
+
+// Objects
+const jonas = {
+    firstName: 'Jonas',
+    lastName: 'Schmedthmann',
+    age: 2037 - 1991,
+    job: 'teacher',
+    friends: ['Michael', 'Steven', 'Peter']
+};
+console.log(jonas);
+
+// Dot vs Bracket notation
+console.log(jonas.lastName);
+console.log(jonas['lastName']);
+
+const nameKey = 'Name';
+console.log(jonas['first' + nameKey]);
+console.log(jonas['last' + nameKey]);
+
+const interestedIn = '';// prompt('What do you want to know about Jonas? Choose between firstName, lastName, age, job, and friends');
+
+if (jonas[interestedIn]) {
+    console.log(jonas[interestedIn]);
+}
+else {
+    console.log('Wrong request! Choose between firstName, lastName, age, job, and friends');
+}
+
+jonas.location = 'Portugal';
+jonas['twitter'] = '@jonas';
+console.log(jonas);
+
+// Challenge
+// 'Jonas has 3 freinds , and his best friend is called Michael'
+console.log(`${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`);
+
+// Object Methods
+const jonasNew = {
+    firstName: 'Jonas',
+    lastName: 'Schmedthmann',
+    birthYear: 1991,
+    job: 'teacher',
+    friends: ['Michael', 'Steven', 'Peter'],
+    hasDriversLicence: true,
+
+    // calcAge: function (birthYear) {
+    //     return 2037 - birthYear;
+    // }
+
+    // calcAge: function () {
+    //     console.log(this);
+    //     return 2037 - this.birthYear;
+    // }
+
+    calcAge: function () {
+        // console.log(this);
+        this.age = 2037 - this.birthYear;
+        return this.age;
+    }
+};
+console.log(jonasNew.calcAge());
+// console.log(jonasNew['calcAge'](1991));
+
+console.log(jonasNew.age);
+console.log(jonasNew.age);
+console.log(jonasNew.age);    
