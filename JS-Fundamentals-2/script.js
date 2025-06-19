@@ -466,6 +466,7 @@ console.log(popped);
 friendsNew.shift();
 console.log(friendsNew);
 */
+/*
 const friendsNew = ['Michael', 'Steven', 'Peter'];
 console.log(friendsNew.indexOf('Steven'));
 console.log(friendsNew.indexOf('Bob'));
@@ -491,7 +492,7 @@ console.log(jonas.lastName);
 console.log(jonas['lastName']);
 
 const nameKey = 'Name';
-console.log(jonas['first' + nameKey]);
+console.log(jonas['first' + nameKey]); // jonas[`first${nameKey}`]
 console.log(jonas['last' + nameKey]);
 
 const interestedIn = '';// prompt('What do you want to know about Jonas? Choose between firstName, lastName, age, job, and friends');
@@ -533,6 +534,12 @@ const jonasNew = {
         // console.log(this);
         this.age = 2037 - this.birthYear;
         return this.age;
+    },
+
+    // Challenge
+    getSummary: function () {
+        return `${this.firstName} is a ${this.calcAge()}-years old ${this.job}, and he has ${this.hasDriversLicence ? 'a' : 'no'}
+         driver's licence.`;
     }
 };
 console.log(jonasNew.calcAge());
@@ -540,4 +547,79 @@ console.log(jonasNew.calcAge());
 
 console.log(jonasNew.age);
 console.log(jonasNew.age);
-console.log(jonasNew.age);    
+console.log(jonasNew.age);
+
+// Challenge
+// 'Jonas is a 46-yeras old teacher, and he has a/no drivers licence'
+console.log(jonasNew.getSummary());
+*/
+
+// Iteration- for loop
+console.log('Lifting weights repetation 1 🏋️‍♂️🏋️');
+console.log('Lifting weights repetation 2 🏋️‍♂️🏋️');
+console.log('Lifting weights repetation 3 🏋️‍♂️🏋️');
+console.log('Lifting weights repetation 4 🏋️‍♂️🏋️');
+console.log('Lifting weights repetation 5 🏋️‍♂️🏋️');
+console.log('Lifting weights repetation 6 🏋️‍♂️🏋️');
+console.log('Lifting weights repetation 7 🏋️‍♂️🏋️');
+console.log('Lifting weights repetation 8 🏋️‍♂️🏋️');
+console.log('Lifting weights repetation 9 🏋️‍♂️🏋️');
+console.log('Lifting weights repetation 10 🏋️‍♂️🏋️');
+
+//for loop keeps running while the condition is TRUE
+console.log('-- for loop --');
+for (let rep = 1; rep <= 10; rep++) {
+    console.log(`Lifting weights repetation ${rep} 🏋️‍♂️🏋️`);
+}
+
+
+// Looping through an Array
+const jonasArray = [
+    'Jonas',
+    'Schmedthmann',
+    2037 - 1991,
+    'teacher',
+    ['Michael', 'Steven', 'Peter'],
+    true
+];
+const types = [];
+
+for (let i = 0; i < jonasArray.length; i++) {
+    console.log(jonasArray[i], typeof jonasArray[i]);
+    //   1 st way of adding elements to an array
+    //  types[i] = typeof jonasArray[i];
+    // 2 nd way of adding elements to an array
+    types.push(typeof jonasArray[i]);
+}
+console.log(types);
+
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+
+const calcAge = function () {
+    for (let i = 0; i < years.length; i++) {
+        // ages[i]=2037-years[i];
+        ages.push(2037 - years[i]);
+    }
+    return ages;
+}
+const allAges = calcAge();
+console.log(allAges);
+
+// Continue and Break statements
+console.log('-- ONLY STRINGS --');
+for (let i = 0; i < jonasArray.length; i++) {
+    if (typeof jonasArray[i] !== 'string') continue;
+    console.log(jonasArray[i], typeof jonasArray[i]);
+}
+
+console.log('-- BREAK WITH NUMBER --');
+for (let i = 0; i < jonasArray.length; i++) {
+    if (typeof jonasArray[i] === 'number') break;
+    console.log(jonasArray[i], typeof jonasArray[i]);
+}
+
+// Looping Backward and Loop in Loops
+for (let i = jonasArray.length - 1; i >= 0; i--) {
+    console.log(i, jonasArray[i]);
+}
