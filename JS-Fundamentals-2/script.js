@@ -623,3 +623,27 @@ for (let i = 0; i < jonasArray.length; i++) {
 for (let i = jonasArray.length - 1; i >= 0; i--) {
     console.log(i, jonasArray[i]);
 }
+
+for (let i = 1; i <= 3; i++) {
+    console.log(`---- Starting excercise ${i} ----`);
+    for (let j = 1; j <= 5; j++) {
+        console.log(`Excercise ${i} : Lifting weights repetation ${j} 🏋️‍♂️🏋️`);
+    }
+}
+
+// While loop
+
+let rep = 1;
+while (rep <= 10) {
+    console.log(`WHILE loop : Lifting weights repetation ${rep} 🏋️‍♂️🏋️`);
+    rep++;
+}
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+console.log(dice);
+while (dice !== 6) {
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+    // console.log(`Dice after reasssign = ${dice}`)
+    if (dice === 6) console.log(`Loop is about to end because dice = ${dice} now..`);
+}
