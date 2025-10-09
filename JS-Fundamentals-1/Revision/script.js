@@ -40,7 +40,7 @@ age = 31;
 const birthYear = 1991;
 // birthYear = 1990;
 // const job;
-*/
+
 
 // Basic Operators: Airthematic, Comparision, Logical and Assignment
 const ageAshwini = 2037 - 1991;
@@ -54,3 +54,97 @@ console.log(`${firstName} ${lastName}`);
 let x = 10 + 5;
 x += 10; // x=x+10
 console.log(x);
+
+
+/////////////////////////////////
+// Strings and template literals
+const firstName = "Ashwini";
+const job = "Programmer";
+const birthYear = 1991;
+const year = 2037;
+
+const ashwini = `I'm ${firstName}, a ${year - birthYear} years old ${job}!`;
+console.log(ashwini);
+
+console.log(`String
+with
+multiple lines`);
+
+
+/////////////////////////////////
+// Taking decisions: if() else statements
+const age = 15;
+
+if (age >= 18) {
+  console.log(`Sarah can start driving license 🚗`);
+} else {
+  const yerasLeft = 18 - age;
+  console.log(`Sarah is too young. Wait another ${yerasLeft} years :) `);
+}
+
+const birthYear = 2012;
+let century;
+if (birthYear <= 2000) {
+  century = 20;
+} else {
+  century = 21;
+}
+
+console.log(century);
+
+
+/////////////////////////////////
+// Type Conversion and Type Coercion
+const inputYear = "1991";
+console.log(Number(inputYear), inputYear);
+console.log(Number(inputYear) + 18);
+console.log(typeof (inputYear + 18));
+
+console.log(Number("Ashwini"));
+console.log(typeof NaN);
+
+console.log(String(23), 23);
+console.log("23" - "10" - 3);
+
+
+/////////////////////////////////
+// Truthy and Falsy values
+console.log(Boolean(0));
+console.log(Boolean(undefined));
+console.log(Boolean("Ashwini"));
+console.log(Boolean({}));
+console.log(Boolean(""));
+
+const money = 0;
+if (money) {
+  console.log("Don't spend it all");
+} else {
+  console.log("You should get a job!");
+}
+
+let height = 0;
+if (height) {
+  console.log("Yey! height is defined!");
+} else {
+  console.log("Height is UNDEFINED");
+}
+  */
+
+/////////////////////////////////
+// Equality Operators(==, ===)
+const age = 18;
+if (age === 18) {
+  console.log("You just became an adult");
+}
+
+const favourite = Number(prompt("What's your favorite number?"));
+console.log(favourite);
+console.log(typeof favourite);
+
+if (favourite === 23) {
+  console.log("Cool! 23 is an amazing number");
+}
+
+if (favourite !== 23) {
+  console.log("Why not 23?");
+}
