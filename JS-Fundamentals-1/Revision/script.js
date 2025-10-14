@@ -128,7 +128,7 @@ if (height) {
 } else {
   console.log("Height is UNDEFINED");
 }
-  */
+  
 
 /////////////////////////////////
 // Equality Operators(==, ===)
@@ -148,3 +148,67 @@ if (favourite === 23) {
 if (favourite !== 23) {
   console.log("Why not 23?");
 }
+
+
+/////////////////////////////////
+// Logical operators
+const hasDriversLicense = true;
+const hasGoodVision = true;
+
+console.log(hasDriversLicense && hasGoodVision);
+console.log(hasDriversLicense || hasGoodVision);
+console.log(!hasDriversLicense);
+*/
+
+/////////////////////////////////
+// Switch statement
+const day = "wednesday";
+
+switch (day) {
+  case "monday":
+    console.log("Plan course structure");
+    console.log("Go to coding meetups");
+    break;
+  case "tuesday":
+    console.log("Prepare theory videos");
+    break;
+  case "wednesday":
+  case "thursday":
+    console.log("Write code examples");
+    break;
+  case "friday":
+    console.log("Record videos");
+    break;
+  case "saturday":
+  case "sunday":
+    console.log("Enjoy the weekend");
+    break;
+  default:
+    console.log("Not a valid week day");
+}
+
+console.log("if-else-if");
+if (day === "monday") {
+  console.log("Plan course structure");
+  console.log("Go to coding meetups");
+} else if (day === "tuesday") {
+  console.log("Prepare theory videos");
+} else if (day === "wednesday" || day === "thursday") {
+  console.log("Write code examples");
+} else if (day === "friday") {
+  console.log("Record videos");
+} else if (day === "saturday" || day === "sunday") {
+  console.log("Enjoy the weekend");
+} else {
+  console.log("Not a valid week day");
+}
+
+/////////////////////////////////
+// Conditional(Ternary) operator
+const age = 3;
+age >= 18
+  ? console.log("I like to drink wine 🍷")
+  : console.log("I like to drink water 💧");
+
+const drink = age >= 18 ? "wine" : "water";
+console.log(drink);
