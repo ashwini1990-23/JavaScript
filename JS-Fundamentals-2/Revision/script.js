@@ -77,7 +77,7 @@ function fruitProcessor(apples, oranges) {
 console.log(fruitProcessor(2, 3));
 */
 
-/* */
+/* 
 ///////////////////////////
 // Arrays
 const friends = ["Michael", "Steven", "Peter"];
@@ -238,3 +238,70 @@ console.log("Age : ", ashwiniObject1.age);
 // Challenge
 // "Jonas is a 46 yeras old teacher and he has a/no driver's license "
 console.log(ashwiniObject1.getSummary());
+*/
+
+/////////////////////////////
+// Iteration-for loops
+
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repeation ${rep}`);
+}
+
+/////////////////////////////
+// Looping Arrays, Break, Continue
+const ashwiniArray = [
+  "Ashwini",
+  "Patil",
+  2037 - 1991,
+  "Programmer",
+  ["Michael", "Steven", "Peter"],
+];
+
+const types = [];
+for (let i = 0; i < ashwiniArray.length; i++) {
+  // console.log(`${i} : ${ashwiniArray[i]}`);
+
+  //Reading from ashwiniArray
+  console.log(ashwiniArray[i], types[i]);
+
+  // Filling/Adding types array
+  //types[i] = typeof ashwiniArray[i];
+
+  types.push(typeof ashwiniArray[i]);
+}
+console.log("typeof: ", types);
+
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+
+for (let i = 0; i < years.length; i++) {
+  ages.push(2037 - years[i]);
+}
+console.log(ages);
+
+// continue and break
+console.log("---- ONLY STRINGS ----");
+for (let i = 0; i < ashwiniArray.length; i++) {
+  if (typeof ashwiniArray[i] !== "string") continue;
+  console.log(ashwiniArray[i], typeof ashwiniArray[i]);
+}
+
+console.log("---- BREAK WITH NUMBER ----");
+for (let i = 0; i < ashwiniArray.length; i++) {
+  if (typeof ashwiniArray[i] === "number") break;
+  console.log(ashwiniArray[i], typeof ashwiniArray[i]);
+}
+
+/////////////////////////////
+// Looping Backwards and Loop in loop
+console.log("---- Looping Backwards ----");
+for (let i = ashwiniArray.length - 1; i >= 0; i--) {
+  console.log(i, ashwiniArray[i]);
+}
+
+for (let i = 1; i <= 3; i++) {
+  console.log(`---- Starting Excercise ${i} ----`);
+  for (let j = 1; j <= 5; j++) {
+    console.log(`Repeation: ${j}`);
+  }
+}
