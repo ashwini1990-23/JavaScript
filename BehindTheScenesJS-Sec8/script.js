@@ -87,6 +87,61 @@ console.log(this);
 
 const calcAgeNew = function (birthYear) {
   console.log(2037 - birthYear);
+  console.log(this);
 };
 
 calcAgeNew(1991);
+
+const calcAgeArrow = birthYear => {
+  console.log(2037 - birthYear);
+  console.log(this);
+};
+
+calcAgeArrow(1980);
+
+const ashwini = {
+  year: 1991,
+  calcAge: function () {
+    console.log(this);
+    console.log(2037 - this.year);
+  },
+};
+
+ashwini.calcAge();
+
+const matilda = {
+  year: 2017,
+};
+
+matilda.calcAge = ashwini.calcAge;
+matilda.calcAge();
+
+const f = ashwini.calcAge;
+console.log(f);
+// f();
+
+/////////////////////////////////
+// Regular functions vs Arrow functions
+
+// var firstNameNew = 'Matilda';
+
+const ashwiniNew = {
+  firstNameNew: 'Ashwini',
+  year: 1991,
+  calcAge: function () {
+    console.log(this);
+    console.log(2037 - this.year);
+    const isMillenial = function () {
+      console.log(this);
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+    isMillenial();
+  },
+
+  greet: () => {
+    console.log(this);
+    console.log(`Hey ${this.firstNameNew}`);
+  },
+};
+ashwiniNew.greet();
+ashwiniNew.calcAge();
