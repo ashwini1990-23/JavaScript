@@ -129,12 +129,22 @@ const ashwiniNew = {
   firstNameNew: 'Ashwini',
   year: 1991,
   calcAge: function () {
-    console.log(this);
+    // console.log(this);
     console.log(2037 - this.year);
+
+    // Solution 1
+    /*const self = this; // self or that
     const isMillenial = function () {
+      console.log(self);
+      console.log(self.year >= 1981 && self.year <= 1996);
+    }; */
+
+    // Solution 2
+    const isMillenial = () => {
       console.log(this);
       console.log(this.year >= 1981 && this.year <= 1996);
     };
+
     isMillenial();
   },
 
@@ -145,3 +155,62 @@ const ashwiniNew = {
 };
 ashwiniNew.greet();
 ashwiniNew.calcAge();
+
+// "arguments" keyword
+const addExprNew = function (a, b) {
+  console.log(arguments);
+  return a + b;
+};
+console.log(addExprNew(2, 5));
+addExprNew(2, 5, 8, 6);
+
+var addArrowNew = (a, b) => {
+  // console.log(arguments);
+  return a + b;
+};
+addArrowNew(2, 5, 8);
+
+////////////////////////////
+// Object References (Shallow vs Deep)
+const jessica1 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+
+function marryPerson(originalPerson, newLastName) {
+  originalPerson.lastName = newLastName;
+  return originalPerson;
+}
+
+// const marriedJessica = jessica1;
+// marriedJessica.lastName = 'Davis';
+const marriedJessica = marryPerson(jessica1, 'Davis');
+
+console.log('Before: ', jessica1);
+console.log('After: ', marriedJessica);
+
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bob'],
+};
+
+// Shallow copy
+const jessicaCopy = { ...jessica };
+jessicaCopy.lastName = 'Davis';
+
+jessicaCopy.family.push('Mary');
+jessicaCopy.family.push('John');
+
+console.log('Before: ', jessica);
+console.log('After: ', jessicaCopy);
+
+// Deep copy /Deep clone
+const jessicaClone = structuredClone(jessica);
+jessicaClone.family.push('Ana');
+jessicaClone.family.push('Robert');
+
+console.log('Before clone: ', jessica);
+console.log('After clone: ', jessicaClone);
