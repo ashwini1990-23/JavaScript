@@ -41,8 +41,142 @@ const restaurant = {
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
   },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ingredients ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient, otherIngredients);
+  },
 };
 
+///////////////////////////////////////////
+// Spread Operator
+
+const arr = [7, 8, 9];
+console.log(...arr);
+
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+console.log(...newArr);
+
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+// Shallow copy of arrays
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log('Shallow copy: ', mainMenuCopy);
+
+// Join or Merge 2 arrays together
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+// Iterables: Arrays, Strings, Maps and Sets but NOT Objects
+const str = 'Ashwini';
+console.log(...str);
+const letters = [...str, ' ', 'S.'];
+console.log(letters);
+
+// Real World example
+const ingredients = [
+  // prompt(`Let's make Pasta! Ingrdient 1?`),
+  // prompt(`Ingrdient 2?`),
+  // prompt(`Ingrdient 3?`),
+];
+console.log(ingredients);
+
+restaurant.orderPasta(...ingredients);
+
+// Objects with Spread Operator
+const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Guiseppe' };
+console.log(newRestaurant);
+
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurantCopy);
+
+///////////////////////////////////////////
+// Rest Pattern and Rest Operator
+
+// 1. Destructuring
+// Spread: because on RIGHT hand side of the assignment operator
+const arr1 = [1, 2, ...[3, 4]];
+
+// Rest: because on Left hand side of the assignment operator
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood);
+
+// Objects with Rest
+const { sat, ...weekDays } = restaurant.openingHours;
+console.log(sat, weekDays);
+
+// 2. Functions
+const add = function (...numbers) {
+  console.log(numbers);
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum = sum + numbers[i];
+  }
+  console.log(sum);
+};
+add(5, 3);
+
+const x = [23, 5, 7];
+add(...x);
+
+restaurant.orderPizza('mushrooms', 'onions', 'olives', 'spinach');
+restaurant.orderPizza('mushrooms');
+
+//////////////////////////////////////////
+console.log('------ OR -------');
+// Short Circuiting(&& , ||)
+// They can use any data type
+console.log(3 || 'Ashwini');
+console.log('' || 'Ashwini');
+console.log(true || 0);
+console.log(undefined || null);
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+console.log('-------- AND -----------');
+console.log(0 && 'Ashwini');
+console.log(7 && 'Ashwini');
+console.log('Hello' && '23' && null && 'Ashwini');
+
+//Practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+restaurant.orderPizza && restaurant.orderPizza('mushrooms');
+
+///////////////////////////////////
+// Nullish Coalacing operator : ??
+
+// restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+const guestsCorrect = restaurant.numGuests ?? 10;
+console.log(guestsCorrect);
+/*
+////////////////////////////////////
+// Object Destructuring
 restaurant.orderDelivery({
   time: '22:30',
   address: 'Via del SOle,21',
@@ -54,8 +188,7 @@ restaurant.orderDelivery({
   address: 'Via del SOle,21',
   starterIndex: 1,
 });
-//////////////////////
-// Object Destructuring
+
 const { name, categories, openingHours } = restaurant;
 console.log(name, categories, openingHours);
 
@@ -96,10 +229,10 @@ let [main, , secondary] = restaurant.categories;
 console.log(main, secondary);
 
 // Switching Variables
-/*const temp = main;
-main = secondary;
-secondary = temp;
-console.log(main, secondary); */
+// const temp = main;
+// main = secondary;
+// secondary = temp;
+// console.log(main, secondary); 
 
 [main, secondary] = [secondary, main];
 console.log(main, secondary);
@@ -117,3 +250,4 @@ console.log(first, third, fourth);
 // Default values
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r);
+*/
