@@ -53,6 +53,181 @@ const restaurant = {
   },
 };
 
+//////////////////////////////////////////
+// Looping Objects
+// Property Names / keys
+const properties = Object.keys(openingHours);
+console.log(properties);
+
+let openStr = `We are open on ${properties.length} days: `;
+
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+// Property Values / values
+const values = Object.values(openingHours);
+console.log(values);
+for (const hour of values) {
+  console.log(hour.open, hour.close);
+}
+
+//Loop over entire Object: keys+values
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key}, we open at ${open} and close at ${close}`);
+}
+
+//////////////////////////////////////////
+// Sets
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Rissotto',
+  'Pasta',
+  'Pizza',
+]);
+console.log(ordersSet);
+console.log(new Set('Ashwini'));
+console.log(new Set());
+
+console.log(ordersSet.size);
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+ordersSet.delete('Rissotto');
+// ordersSet.clear();
+console.log(ordersSet);
+
+for (const order of ordersSet) console.log(order);
+
+// Real world use case of Set : 1) to remove duplicate values from an Array
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+
+console.log(new Set(staff).size);
+// 2) counting how amny diff letters there are in a String
+console.log(new Set('AshwiniPatil'));
+console.log(new Set('AshwiniPatil').size);
+
+//////////////////////////////////////////
+// New Operations of Sets
+const italianFoods = new Set([
+  'pasta',
+  'gnocchi',
+  'tomatoes',
+  'olive oil',
+  'garlic',
+  'basil',
+]);
+
+const mexicanFoods = new Set([
+  'tortillas',
+  'beans',
+  'rice',
+  'tomatoes',
+  'avocado',
+  'garlic',
+]);
+
+const commonFoods = italianFoods.intersection(mexicanFoods);
+console.log('Intersection: ', commonFoods);
+console.log([...commonFoods]);
+
+const italianMexicanFusion = italianFoods.union(mexicanFoods);
+console.log('Union: ', italianMexicanFusion);
+console.log([...italianMexicanFusion]);
+
+const uniqueItalianFoods = italianFoods.difference(mexicanFoods);
+console.log('Differenc Italian: ', uniqueItalianFoods);
+const uniqueMexicanFoods = mexicanFoods.difference(italianFoods);
+console.log('Difference Mexican: ', uniqueMexicanFoods);
+
+const uniqueItalianANdMexicanFoods =
+  italianFoods.symmetricDifference(mexicanFoods);
+console.log('Symmetric Difference: ', uniqueItalianANdMexicanFoods);
+
+console.log(italianFoods.isDisjointFrom(mexicanFoods));
+
+///////////////////////////////////////////
+// Maps
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Forenze, Italy');
+console.log(rest.set(2, 'Lisbon, Portugal'));
+
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed');
+
+console.log(rest);
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+const time = 21;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+console.log(rest.has('categories'));
+
+rest.delete(2);
+// rest.clear();
+
+const arr = [1, 2];
+rest.set(arr, 'Test');
+rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
+console.log(rest.size);
+
+console.log(rest.get(arr));
+
+///////////////////////////////////////////
+// Maps: Iteration
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct'],
+  [false, 'Try again!'],
+]);
+console.log(question);
+
+// Convert Object to Map
+console.log(Object.entries(openingHours));
+
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+// Quiz app
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+// const answer = Number(prompt('Your answer'));
+const answer = 3;
+console.log(answer);
+console.log(question.get(answer));
+
+console.log(question.get(question.get('correct') === answer));
+
+// Convert Map to an Array
+console.log([...question]);
+console.log([...question.entries()]);
+console.log([...question.keys()]);
+console.log([...question.values()]);
+
+/*
 ///////////////////////////////////////////
 // Logical Assignment operator
 const rest1 = {
@@ -124,7 +299,7 @@ console.log(restaurant.orderRissotto?.(0, 1) ?? 'Method does not exist');
 // Arrays with Optional chaining
 const users = [{ name: 'Ashwini', email: 'ashwini@gmail.com' }];
 console.log(users[0]?.name ?? 'User array empty');
-/*
+
 ///////////////////////////////////////////
 // Spread Operator
 
