@@ -53,6 +53,7 @@ const restaurant = {
   },
 };
 
+/*
 //////////////////////////////////////////
 // Looping Objects
 // Property Names / keys
@@ -269,6 +270,125 @@ checkMiddleSeat('3E');
 
 console.log(new String('Ashwini'));
 console.log(typeof new String('ashwini'));
+*/
+
+//////////////////////////////////////////
+// Strings - Part-2 (String Methods)
+const airline = 'TAP Air Portugal';
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+console.log('Ashwini'.toLowerCase());
+console.log('Ashwini'.toUpperCase());
+
+// To fix Capitalization in Passenger's name
+const passenger = 'aShwINi'; // 'Ashwini'
+const passenegrLowerCase = passenger.toLowerCase();
+console.log(passenegrLowerCase);
+const correctPasseneger =
+  passenegrLowerCase[0].toUpperCase() + passenegrLowerCase.slice(1);
+console.log(correctPasseneger);
+
+// Comparing user input email
+const email = 'hello@example.io';
+const loginEmail = '  Hello@Example.Io \n';
+
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = lowerEmail.trim();
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+
+console.log(email === normalizedEmail);
+
+// To Replace part of a string
+const priceGB = '288,97£';
+const priceUS = priceGB.replace('£', '$').replace(',', '. ');
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+// const correctAnnouncement = announcement.replace('door', 'gate');
+// const correctAnnouncement = announcement.replaceAll('door', 'gate');
+const correctAnnouncement = announcement.replace(/door/g, 'gate');
+console.log(correctAnnouncement);
+
+// String Methods that return Booleans
+const plane = 'Airbus A320neo';
+console.log(plane.includes('A320'));
+console.log(plane.includes('Boeing'));
+console.log(plane.startsWith('Air'));
+console.log(plane.endsWith('neo'));
+
+if (plane.startsWith('Airbus') && plane.endsWith('neo'))
+  console.log('Part of the new Airbus family');
+
+const checkbaggage = function (items) {
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are NOT allowed onboard');
+  } else {
+    console.log('Welcome aboard');
+  }
+};
+
+checkbaggage('I have a laptop, some Food and a pocket Knife');
+checkbaggage('Socks and camera');
+checkbaggage('Got some snacks and a gun for protection');
+
+//////////////////////////////////////////
+// Working with Strings- Part-3
+// Split and Join
+console.log('a+very+nice+string'.split('+'));
+console.log('Ashwini Patil'.split(' '));
+
+const [firstName, lastName] = 'Ashwini Patil'.split(' ');
+console.log(firstName, lastName);
+
+const newName = ['Mrs.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizePassengerName = function (name) {
+  const names = name.split(' ');
+
+  const namesUpper = [];
+  for (const item of names) {
+    // namesUpper.push(item[0].toUpperCase() + item.slice(1));
+    namesUpper.push(item.replace(item[0], item[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+};
+
+capitalizePassengerName('jessica ann smith davis');
+capitalizePassengerName('ashwini patil');
+
+// Padding a String
+const message = 'Got to gate 23!';
+console.log(message.padStart(25, '+').padEnd(35, '+'));
+console.log('Ashwini'.padStart(10, '+'));
+
+const maskCreditCard = function (number) {
+  // const str = String(number);
+  const str = number + '';
+  // console.log(str);
+  const newStr = str.slice(-4).padStart(str.length, '*');
+  // console.log(newStr);
+  return newStr;
+};
+console.log(maskCreditCard(12345678));
+console.log(maskCreditCard('1234567890'));
+
+// Repeat
+const message2 = 'Bad weather... All departures will be delayed... ';
+console.log(message2.repeat(5));
+
+const palnesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
+};
+palnesInLine(5);
+palnesInLine(3);
+palnesInLine(12);
+
 /*
 ///////////////////////////////////////////
 // Logical Assignment operator
