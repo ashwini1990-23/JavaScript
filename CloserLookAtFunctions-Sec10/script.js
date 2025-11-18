@@ -184,4 +184,83 @@ lufthanza.buyPlane = function () {
   console.log(this.planes);
 };
 // lufthanza.buyPlane();
-document.querySelector('.buy').addEventListener('click', lufthanza.buyPlane);
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthanza.buyPlane.bind(lufthanza));
+
+// Partial application
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+// addVAT=value=>value+value*0.23;
+const addVAT = addTax.bind(null, 0.23);
+console.log(addVAT(100));
+
+const addTaxF = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const addVATF = addTaxF(0.23);
+console.log(addVATF(100));
+console.log(addVATF(23));
+
+///////////////////////////////////////////
+// Immediately Invoked Function Expressions (IIFE)
+const runOnce = function () {
+  console.log(`This will never run again`);
+};
+// runOnce();
+
+// 1
+(function () {
+  console.log(`IIFE: This function will never run again`);
+})();
+// 2
+(() => console.log(`IIFE: for Arrow function`))();
+
+/////////////////////////////////////////////
+// Closures
+const secureBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+console.dir(booker);
+
+//////////////////////////////////
+// More Closures Examples
+// 1
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 7;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+// reassigning f function
+h();
+f();
+console.dir(f);
+
+// 2
