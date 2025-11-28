@@ -1,0 +1,3 @@
+// Guess My Number
+
+// Goal: simply guess a secret number which is between 1 and 20. In the input field we type a number, click check button and on the right side of page we get a message(Too low, Too high and Correct number). We start with a score set to 20 and after one failed guess it gets decreased by 1. When the number guessed is same as secret number, we will get "Correct Number" message, screen turns to green and Highscore value will set to the value of Score. If we want to play again simply click on Again! button, the page will get reset to initial values except for Highscore value. Highscore value is kept so if we are quicker to guess the number correct in next round, then the high score will get updated(it will become better).
